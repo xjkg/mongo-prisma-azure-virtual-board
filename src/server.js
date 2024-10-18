@@ -14,7 +14,10 @@ const usersRouter = require("./routes/users")
 app.use("/users", usersRouter)
 
 const boardsRouter = require("./routes/boards")
+const notesRouter = require("./routes/notes")
+
 app.use("/boards", boardsRouter)
+app.use("/boards/:boardId/notes", notesRouter)
 
 app.listen(PORT, () => {
     console.log(`Server listening on port http://localhost:${PORT}`)

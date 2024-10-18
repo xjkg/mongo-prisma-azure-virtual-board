@@ -1,6 +1,6 @@
 
-#@apiURL=http://localhost:8080
-@apiURL={{$dotenv API_URL}}
+@apiURL=http://localhost:8080
+#@apiURL={{$dotenv API_URL}}
 @token={{$dotenv TEMP_JWT_TOKEN}}
 
 ###
@@ -11,6 +11,7 @@ Authorization: Bearer {{token}}
 POST {{apiURL}}/boards
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
 {
-    "title": "New board test title"
+    "title": "Board 2"
 }

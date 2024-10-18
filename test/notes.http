@@ -1,0 +1,31 @@
+@apiURL=http://localhost:8080
+#@apiURL={{$dotenv API_URL}}
+@token={{$dotenv TEMP_JWT_TOKEN}}
+@boardId=67126fc0ad29b4288dda4b54
+@noteId=6712f061bbafdb005d58b4cc
+
+###
+POST {{apiURL}}/boards/{{boardId}}/notes
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "content": "Keep it going"
+}
+
+###
+GET {{apiURL}}/boards/{{boardId}}/notes
+Authorization: Bearer {{token}}
+
+###
+PUT {{apiURL}}/boards/{{boardId}}/notes/{{noteId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "content": "Aaaaand anotha one"
+}
+
+###
+DELETE {{apiURL}}/boards/{{boardId}}/notes/{{noteId}}
+Authorization: Bearer {{token}}
