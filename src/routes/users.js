@@ -25,7 +25,7 @@ router.post("/register", async (req,res) => {
         })
         res.send({msg: "New user created"})
     } catch (error){
-        console.error(error);
+        console.error(error)
         res.status(500).send({msg: "Error creating user"})
     }
 
@@ -49,7 +49,21 @@ router.post("/login", async (req,res) => {
         sub: user.id,
         name: user.name,
     }, process.env.JWT_SECRET, {expiresIn: '30d'})
+/*
+TODO: Refresh token
 
+    const refresh_token = await jwt.sign({
+        sub: user.id
+    }, process.env.JWT_SECRET, {expiresIn: '30d'})
+
+    res.send({msg: "Successful login", access_token: token, refresh_token: refresh_token})
+    
+    // access_token expiresin 10m
+    // vid login, om access token är expired, meddela error åt frontend,
+    // om frontend får en expired access token:
+    // GET/refresh: (refresh token exists in DB, here's your new access token)
+
+*/
     res.send({msg: "Successful login", jwt: token})
 })
 module.exports = router
