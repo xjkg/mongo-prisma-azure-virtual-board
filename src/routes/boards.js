@@ -52,7 +52,7 @@ router.put('/:id', async (req, res) => {
         },
       })
 
-    res.send({msg: `note ${req.params.id} updated`})
+    res.send({msg: `Board "${req.body.title}" changed to: "${updateBoard.title}"`})
 })
 
 module.exports = router

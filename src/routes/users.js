@@ -45,7 +45,7 @@ router.post("/login", async (req,res) => {
         console.log("Wrong password")
         return res.status(401).send({msg: "Authentication failed"})
     }
-    const token = await jwt.sign({
+    const token = jwt.sign({
         sub: user.id,
         name: user.name,
     }, process.env.JWT_SECRET, {expiresIn: '30d'})
