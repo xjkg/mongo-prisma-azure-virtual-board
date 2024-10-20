@@ -19,12 +19,3 @@ Content-Type: application/json
     "name": "test",
     "password": "test"
 }
-
-###
-POST {{apiURL}}/test
-
-Content-Type: application/json
-
-{
-    "test": "TEST"
-}

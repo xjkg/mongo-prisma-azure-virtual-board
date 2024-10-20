@@ -2,6 +2,8 @@
 @apiURL=http://localhost:8080
 #@apiURL={{$dotenv API_URL}}
 @token={{$dotenv TEMP_JWT_TOKEN}}
+@otherToken={{$dotenv OTHER_JWT_TOKEN}}
+@boardId=valid_note_id
 
 ###
 GET {{apiURL}}/boards
@@ -10,8 +12,21 @@ Authorization: Bearer {{token}}
 ###
 POST {{apiURL}}/boards
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{otherToken}}
 
 {
-    "title": "Board 2"
+    "title": "Testboard"
 }
+
+###
+POST {{apiURL}}/boards/{{boardId}}/invite
+Content-Type: application/json
+Authorization: Bearer {{otherToken}}
+
+{
+    "username": "APItest"
+}
+
+###
+DELETE {{apiURL}}/boards/{{boardId}}
+Authorization: Bearer {{otherToken}}

@@ -1,16 +1,18 @@
 @apiURL=http://localhost:8080
 #@apiURL={{$dotenv API_URL}}
 @token={{$dotenv TEMP_JWT_TOKEN}}
-@boardId=67126fc0ad29b4288dda4b54
-@noteId=6712f061bbafdb005d58b4cc
+@otherToken={{$dotenv OTHER_JWT_TOKEN}}
+
+@boardId=valid_board_id
+@noteId=valid_note_id
 
 ###
 POST {{apiURL}}/boards/{{boardId}}/notes
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{otherToken}}
 
 {
-    "content": "Keep it going"
+    "content": "Another note by test"
 }
 
 ###

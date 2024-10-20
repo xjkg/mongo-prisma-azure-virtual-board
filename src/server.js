@@ -3,8 +3,10 @@ require('dotenv').config()
 const cors = require('cors')
 const app = express()
 
+const FRONTEND_URL = 'http://127.0.0.1:5500'
+
 app.use(cors({
-    origin: 'http://127.0.0.1:5500',
+    origin: FRONTEND_URL,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
 }))
@@ -12,18 +14,13 @@ app.use(cors({
 app.use(express.json())
 const PORT = process.env.PORT || 8080
 
-app.post('/test', (req, res) => {
-console.log('Received body:', req.body)
-res.send({ message: "Test genomfört", body: req.body })
-})
-
 const usersRouter = require("./routes/users")
 app.use("/users", usersRouter)
 
 const boardsRouter = require("./routes/boards")
-const notesRouter = require("./routes/notes")
-
 app.use("/boards", boardsRouter)
+
+const notesRouter = require("./routes/notes")
 app.use("/boards/:boardId/notes", notesRouter)
 
 app.listen(PORT, () => {
