@@ -11,7 +11,15 @@ router.post("/register", async (req,res) => {
     const { name, password } = req.body
 
     if (!name || !password) {
-        return res.status(400).send({ msg: "Name and password are required." })
+        return res.status(400).send({ msg: "Name and password are required" })
+    }
+
+    const existingUser = await prisma.user.findUnique({
+        where: { name }
+    })
+
+    if (existingUser) {
+        return res.status(400).send({ msg: "User with this name already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -49,21 +57,7 @@ router.post("/login", async (req,res) => {
         sub: user.id,
         name: user.name,
     }, process.env.JWT_SECRET, {expiresIn: '30d'})
-/*
-TODO: Refresh token
 
-    const refresh_token = await jwt.sign({
-        sub: user.id
-    }, process.env.JWT_SECRET, {expiresIn: '30d'})
-
-    res.send({msg: "Successful login", access_token: token, refresh_token: refresh_token})
-    
-    // access_token expiresin 10m
-    // vid login, om access token är expired, meddela error åt frontend,
-    // om frontend får en expired access token:
-    // GET/refresh: (refresh token exists in DB, here's your new access token)
-
-*/
     res.send({msg: "Successful login", jwt: token})
 })
 module.exports = router
