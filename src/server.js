@@ -3,7 +3,7 @@ require('dotenv').config()
 const cors = require('cors')
 const app = express()
 
-const FRONTEND_URL = 'https://wom-projekt1-hgdyf8h2a0fshuh0.northeurope-01.azurewebsites.net/'
+const FRONTEND_URL = 'https://wom-projekt1-ws.azurewebsites.net'
 
 app.use(cors({
     origin: FRONTEND_URL,
@@ -24,5 +24,5 @@ const notesRouter = require("./routes/notes")
 app.use("/boards/:boardId/notes", notesRouter)
 
 app.listen(PORT, () => {
-    console.log(`Server listening on port http://localhost:${PORT}`)
+    console.log(`Server listening on port ${PORT}`)
 })
