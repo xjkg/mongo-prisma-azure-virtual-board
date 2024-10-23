@@ -15,12 +15,9 @@ router.get('/', authorize, async (req, res) => {
 
         const accessibleBoards = await prisma.board.findMany({
             where: {
-                id: {
-                    in: req.userData.otherBoards
-                },
-                OR: [
-                    { ownerId: { in: req.userData.otherUserIds } }
-                ]
+                otherUsers: {
+                    has: req.userData.sub
+                }
             }
         })
 

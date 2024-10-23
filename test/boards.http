@@ -2,7 +2,7 @@
 @apiURL=http://localhost:8080
 @token={{$dotenv TEMP_JWT_TOKEN}}
 @otherToken={{$dotenv OTHER_JWT_TOKEN}}
-@boardId=valid_note_id
+@boardId=67191505d75543e4dddbf8d5
 
 ###
 GET {{apiURL}}/boards
@@ -23,7 +23,7 @@ Content-Type: application/json
 Authorization: Bearer {{otherToken}}
 
 {
-    "username": "APItest"
+    "username": "xjkg"
 }
 
 ###
