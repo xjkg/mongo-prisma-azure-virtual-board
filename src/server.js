@@ -3,6 +3,7 @@ require('dotenv').config()
 const cors = require('cors')
 const app = express()
 
+//const FRONTEND_URL = 'http://127.0.0.1:5500'
 const FRONTEND_URL = 'https://wom-projekt1-ws.azurewebsites.net'
 
 app.use(cors({
