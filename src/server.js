@@ -3,7 +3,7 @@ require('dotenv').config()
 const cors = require('cors')
 const app = express()
 
-const FRONTEND_URL = 'http://127.0.0.1:5500'
+const FRONTEND_URL = 'https://wom-projekt1-hgdyf8h2a0fshuh0.northeurope-01.azurewebsites.net/'
 
 app.use(cors({
     origin: FRONTEND_URL,
