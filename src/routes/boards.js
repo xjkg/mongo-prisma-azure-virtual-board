@@ -6,7 +6,6 @@ const authorize = require('../middleware/auth')
 const prisma = new PrismaClient()
 
 router.get('/', authorize, async (req, res) => {
-    console.log("boards / GET")
     try {
         const ownedBoards = await prisma.board.findMany({
             where: {
@@ -16,20 +15,24 @@ router.get('/', authorize, async (req, res) => {
 
         const accessibleBoards = await prisma.board.findMany({
             where: {
-                id: { in: req.userData.otherBoards }
+                id: {
+                    in: req.userData.otherBoards
+                },
+                OR: [
+                    { ownerId: { in: req.userData.otherUserIds } }
+                ]
             }
         })
 
-        const allBoards = [...new Map([...ownedBoards, ...accessibleBoards].map(board => [board.id, board])).values()];
+        const allBoards = [...new Map([...ownedBoards, ...accessibleBoards].map(board => [board.id, board])).values()]
 
-
-        res.send({msg: `${req.userData.name}'s boards`, boards: allBoards})
+        res.send({ msg: `${req.userData.name}'s boards`, boards: allBoards })
     } catch (error) {
         console.log(error)
-        res.status(500).send({msg: "Error"})
+        res.status(500).send({ msg: "Error" })
     }
-
 })
+
 
 router.post('/', authorize, async (req, res) => {
     console.log(req.body)
