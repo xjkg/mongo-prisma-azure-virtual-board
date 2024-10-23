@@ -37,7 +37,11 @@ router.post('/', authorize, async (req, res) => {
         const newNote = await prisma.note.create({
             data: {
                 content: req.body.content,
-                boardId: req.params.boardId
+                boardId: req.params.boardId,
+                width: 200,
+                height: 100,
+                x: 50,
+                y: 100,
             }
         })
 
@@ -47,6 +51,34 @@ router.post('/', authorize, async (req, res) => {
         res.status(500).send({ msg: "ERROR", error: error.message })
     }
 })
+
+router.put('/:boardId/notes/:noteId/position', authorize, async (req, res) => {
+    const { x, y } = req.body;
+    try {
+        const updatedNote = await prisma.note.update({
+            where: { id: req.params.noteId },
+            data: { x, y }
+        });
+        res.json({ message: 'Position updated', note: updatedNote });
+    } catch (error) {
+        console.error('Error updating note position:', error);
+        res.status(500).json({ message: 'Failed to update position' });
+    }
+});
+
+router.put('/:boardId/notes/:noteId/size', authorize, async (req, res) => {
+    const { width, height } = req.body;
+    try {
+        const updatedNote = await prisma.note.update({
+            where: { id: req.params.noteId },
+            data: { width, height }
+        });
+        res.json({ message: 'Size updated', note: updatedNote });
+    } catch (error) {
+        console.error('Error updating note size:', error);
+        res.status(500).json({ message: 'Failed to update size' });
+    }
+});
 
 router.put('/:noteId', authorize, async (req, res) => {
     console.log(req.body)

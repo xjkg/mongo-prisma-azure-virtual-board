@@ -1,5 +1,4 @@
-@apiURL=http://localhost:8080
-#@apiURL={{$dotenv API_URL}}
+@apiURL={{$dotenv API_URL}}
 @token={{$dotenv TEMP_JWT_TOKEN}}
 @otherToken={{$dotenv OTHER_JWT_TOKEN}}
 

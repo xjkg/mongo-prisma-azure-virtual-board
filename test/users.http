@@ -1,6 +1,5 @@
 
-@apiURL=http://localhost:8080
-#@apiURL={{$dotenv API_URL}}
+@apiURL={{$dotenv API_URL}}
 
 ###
 POST {{apiURL}}/users/register
